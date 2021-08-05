@@ -14,21 +14,19 @@ class _HomePageState extends State<HomePage> {
     String data =
         "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.";
 
-    return SafeArea(
-      child: Scaffold(
-        body: SingleChildScrollView(
-          child: Column(children: [
-            Container(
-              height: size.height * 0.4,
-              child: Image.network(
-                  "https://shepherdtraveller.com/wp-content/uploads/2021/04/oeschinen-lake-oeschinensee-swiss-lakes-1024x683.jpg"),
-              width: size.width,
-            ),
-            SetText(),
-            SetButtons(),
-            Padding(padding: EdgeInsets.all(25), child: Text(data)),
-          ]),
-        ),
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Column(children: [
+          Container(
+            height: size.height * 0.4,
+            child: Image.network(
+                "https://shepherdtraveller.com/wp-content/uploads/2021/04/oeschinen-lake-oeschinensee-swiss-lakes-1024x683.jpg"),
+            width: size.width,
+          ),
+          SetText(),
+          SetButtons(),
+          Padding(padding: EdgeInsets.all(25), child: Text(data)),
+        ]),
       ),
     );
   }
@@ -49,9 +47,11 @@ class _SetTextState extends State<SetText> {
     return Padding(
       padding: EdgeInsets.all(25),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Container(
-            width: MediaQuery.of(context).size.width * 0.7,
+            //color: Colors.pink,
+            width: MediaQuery.of(context).size.width * 0.6,
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Text("oeschinen lake campground",
@@ -68,35 +68,42 @@ class _SetTextState extends State<SetText> {
               )
             ]),
           ),
-          isFilled
-              ? IconButton(
-                  icon: Icon(
-                    Icons.star,
-                    color: Colors.red,
-                  ),
-                  onPressed: () {
-                    setState(() {
-                      isFilled = false;
-                      count--;
-                    });
-                  },
+          Container(
+            //color: Colors.blue,
+            width: MediaQuery.of(context).size.width * 0.2,
+            child: Row(
+              children: [
+                isFilled
+                    ? IconButton(
+                        icon: Icon(
+                          Icons.star,
+                          color: Colors.red,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            isFilled = false;
+                            count--;
+                          });
+                        },
+                      )
+                    : IconButton(
+                        icon: Icon(
+                          Icons.star_outline,
+                          color: Colors.red,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            isFilled = true;
+                            count++;
+                          });
+                        },
+                      ),
+                Text(
+                  count.toString(),
+                  style: TextStyle(fontSize: 15, color: Colors.red),
                 )
-              : IconButton(
-                  icon: Icon(
-                    Icons.star_outline,
-                    color: Colors.red,
-                  ),
-                  onPressed: () {
-                    setState(() {
-                      isFilled = true;
-                      count++;
-                    });
-                  },
-                ),
-
-          Text(
-            count.toString(),
-            style: TextStyle(fontSize: 15, color: Colors.red),
+              ],
+            ),
           )
 
           //now for star
